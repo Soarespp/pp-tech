@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { MercadoContext } from "./MercadoContext";
-import produtoImage from "@/dataMOck/extencoes_vscode.jpg";
 import { produtoService } from "@/services/produtos";
 import { listsCompras, UsuarioCompras } from "@/services";
 import { useLoginContext } from "../Login";
@@ -21,13 +20,6 @@ export const MercadoProvider = ({ children }) => {
   const [comprasCompartilhadas, setComprasCompartilhadas] = useState([]);
 
   const [isPending, startTransition] = useTransition();
-
-  // console.log("Mercado Provider", {
-  //   list,
-  //   produtos,
-  //   userDados,
-  //   vinculosCompras,
-  // });
 
   const updateProduto = async (prod, id) => {
     await ItensCompra.updateItensCompra(id, {
@@ -239,12 +231,6 @@ export const MercadoProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!userDados) {
-      return;
-    }
-
-    console.log("effet mercado provider", userDados);
-    getDadosListaMercado();
     getDadosProdutos();
   }, [userDados]);
 
@@ -274,6 +260,7 @@ export const MercadoProvider = ({ children }) => {
     deleteProduto,
     vincularUsuarios,
     atualizarAll,
+    getUsuariosCompras,
   };
 
   return (

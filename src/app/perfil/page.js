@@ -171,7 +171,6 @@ const Perfil = () => {
                 {tiposDocumentos.map((documento) => (
                   <option
                     defaultValue={userDados?.tipo_documento}
-                    // value="documento"
                     key={documento}
                   >
                     {documento}

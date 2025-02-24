@@ -84,63 +84,61 @@ const HistoricoCompras = () => {
       {/* Lista de Histórico */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-4">
-          {historico
-            // .sort((a, b) => b.dtFim - a.dtFim)
-            .map((his) => (
-              <div
-                key={his.id}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md 
+          {historico.map((his) => (
+            <div
+              key={his.id}
+              className="bg-white rounded-lg shadow-sm hover:shadow-md 
                        transition-all duration-200 overflow-hidden"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-medium text-gray-800">
-                        Lista de {new Date(his.dtFim).toLocaleString()}
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {his.compras_itens?.length}{" "}
-                        {his.compras_itens?.length === 1 ? "item" : "itens"}
-                      </p>
-                    </div>
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-medium text-gray-800">
+                      Lista de {new Date(his.dtFim).toLocaleString()}
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      {his.compras_itens?.length}{" "}
+                      {his.compras_itens?.length === 1 ? "item" : "itens"}
+                    </p>
+                  </div>
 
-                    <button
-                      onClick={() => {
-                        setSelectedList(his);
-                        setOpenModal({ open: true, idHistorico: his.id });
-                      }}
-                      className="p-2 text-gray-600 hover:text-green-900 
+                  <button
+                    onClick={() => {
+                      setSelectedList(his);
+                      setOpenModal({ open: true, idHistorico: his.id });
+                    }}
+                    className="p-2 text-gray-600 hover:text-green-900 
                              hover:bg-green-50 rounded-full
                              transition-all duration-200"
-                      title="Reaproveitar lista"
-                    >
-                      <FiRefreshCcw className="w-5 h-5" />
-                    </button>
-                  </div>
+                    title="Reaproveitar lista"
+                  >
+                    <FiRefreshCcw className="w-5 h-5" />
+                  </button>
+                </div>
 
-                  {/* Lista de Produtos */}
-                  <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {his.compras_itens?.slice(0, 6).map((item, index) => (
-                      <div
-                        key={index}
-                        className="text-sm px-3 py-1.5 bg-gray-50 rounded-full
+                {/* Lista de Produtos */}
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {his.compras_itens?.slice(0, 6).map((item, index) => (
+                    <div
+                      key={index}
+                      className="text-sm px-3 py-1.5 bg-gray-50 rounded-full
                                text-gray-600 truncate"
-                      >
-                        {item.produtos.name}
-                      </div>
-                    ))}
-                    {his.compras_itens?.length > 6 && (
-                      <div
-                        className="text-sm px-3 py-1.5 bg-gray-50 rounded-full
+                    >
+                      {item.produtos.name}
+                    </div>
+                  ))}
+                  {his.compras_itens?.length > 6 && (
+                    <div
+                      className="text-sm px-3 py-1.5 bg-gray-50 rounded-full
                                  text-gray-600"
-                      >
-                        +{his.compras_itens?.length - 6} itens
-                      </div>
-                    )}
-                  </div>
+                    >
+                      +{his.compras_itens?.length - 6} itens
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
 
           {historico.length === 0 && (
             <div className="text-center py-12">

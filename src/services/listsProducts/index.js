@@ -46,6 +46,10 @@ export const listsCompras = {
         .is("dtFim", null)
         .single();
 
+      if (error?.code === "PGRST116") {
+        return {};
+      }
+
       if (error) throw error;
       return data;
     } catch (error) {

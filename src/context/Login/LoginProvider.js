@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { LoginContext } from "./LoginContext";
 import { decodeUserToken, generateUserToken } from "@/utils/generateKey";
 import { userService } from "@/services";
+import { useRouter } from "next/navigation";
 
 export const LoginProvider = ({ children, directRoute }) => {
+  const router = useRouter();
   const [userDados, setUserDados] = useState();
   const [login, setLogin] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
@@ -56,8 +58,6 @@ export const LoginProvider = ({ children, directRoute }) => {
   };
 
   useEffect(() => {
-    console.log("effet LOGIN provider");
-
     getDadosUsuarios();
   }, []);
 

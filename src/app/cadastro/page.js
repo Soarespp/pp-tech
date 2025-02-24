@@ -12,7 +12,6 @@ import { useLoginContext } from "@/context/Login";
 const tiposDocumentos = ["CPF", "RG", "CNPJ"];
 
 const CadastroUsuario = () => {
-  // const { atualizarAll } = useMercadoContext();
   const { getDadosUsuarios } = useLoginContext();
   const router = useRouter();
   const {

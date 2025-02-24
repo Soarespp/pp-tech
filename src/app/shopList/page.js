@@ -10,6 +10,7 @@ import {
   FiUserPlus,
   FiSearch,
   FiShoppingCart,
+  FiRefreshCw,
 } from "react-icons/fi";
 import { BsCartPlus, BsBagCheck } from "react-icons/bs";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -35,14 +36,19 @@ const ShopList = () => {
     setTypeList,
     produtos,
     getDadosListaMercado,
-    getUsuariosCompras,
     finalizarListaMercado,
+    getUsuariosCompras,
   } = useMercadoContext();
   const [openCadProd, setOpenCadProd] = useState(false);
   const [openVincUsers, setOpenVincUsers] = useState(false);
   const [openListaCompartilhada, setOpenListaCompartilhada] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
   const [finalizar, setFinalizar] = useState(false);
+
+  useEffect(() => {
+    getDadosListaMercado();
+    getUsuariosCompras();
+  }, []);
 
   return (
     <>
@@ -83,10 +89,6 @@ const ShopList = () => {
                 />
                 <span className="font-medium">Voltar</span>
               </Link>
-
-              <button onClick={() => getDadosListaMercado("pedro")}>
-                reload
-              </button>
 
               {/* Título */}
               <div className="flex items-center space-x-3">
@@ -176,7 +178,8 @@ const ShopList = () => {
         {/* Barra de Pesquisa */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="bg-white rounded-lg shadow-sm p-4">
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              {/* Campo de Busca */}
               <div className="flex-grow relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FiSearch className="h-5 w-5 text-gray-400" />
@@ -192,13 +195,26 @@ const ShopList = () => {
                        outline-none"
                 />
               </div>
+
+              {/* Botão de Busca */}
               <button
-                className="ml-4 px-6 py-2 bg-green-900 text-white rounded-lg
+                className="px-6 py-2 bg-green-900 text-white rounded-lg
                          hover:bg-green-800 transition-colors duration-200
-                         flex items-center"
+                         flex items-center whitespace-nowrap"
               >
                 <FiSearch className="w-5 h-5 mr-2" />
                 Buscar
+              </button>
+
+              {/* Botão de Reload */}
+              <button
+                onClick={() => getDadosListaMercado("pedro")}
+                className="p-2 text-gray-600 hover:text-green-900 
+                         hover:bg-green-50 rounded-full
+                         transition-all duration-200"
+                title="Atualizar lista"
+              >
+                <FiRefreshCw className="w-5 h-5" />
               </button>
             </div>
           </div>
