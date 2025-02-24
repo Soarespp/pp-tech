@@ -11,7 +11,8 @@ export const LoginProvider = ({ children, directRoute }) => {
   const [userDados, setUserDados] = useState();
   const [login, setLogin] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
-  const tokenUser = !!localStorage ? localStorage?.getItem("auth_token") : null;
+  const tokenUser =
+    typeof window !== "undefined" ? localStorage?.getItem("auth_token") : null;
 
   const atualizarDadosLogin = async () => {
     if (usuarios.length === 0) {

@@ -7,7 +7,8 @@ const pagesNotAuth = ["/", "/cadastro"];
 
 export const useAuth = () => {
   const router = useRouter();
-  const token = localStorage.getItem("auth_token");
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
   const { userDados, usuarios, setUserDados, deslogar } = useLoginContext();
 
   const logout = () => {

@@ -8,15 +8,15 @@ import { FiArrowLeft, FiSave } from "react-icons/fi";
 
 import { ImageUpload } from "@/components";
 import { useMercadoContext } from "@/context/mercado";
-import { useEffect, useState, useTransition } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import { produtoService } from "@/services/produtos";
 import { categorias } from "@/utils/constantes";
 
-const CadastroProduto = () => {
+const CadastroProdutoApp = () => {
   const [isPending, startTransition] = useTransition();
   const { getDadosProdutos } = useMercadoContext();
   const searchParams = useSearchParams();
-  const idParams = searchParams.get("id");
+  const idParams = earchParams.get("id");
   const router = useRouter();
 
   const { handleSubmit, register, control, trigger, reset } = useForm();
@@ -220,4 +220,12 @@ const CadastroProduto = () => {
   );
 };
 
-export default CadastroProduto;
+export default function CadastroProduto() {
+  return (
+    <Suspense>
+      <CadastroProdutoApp />
+    </Suspense>
+  );
+}
+
+// export default CadastroProduto;
