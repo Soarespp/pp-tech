@@ -13,7 +13,7 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { user: "pedro", password: "123" } });
+  } = useForm({ defaultValues: {} });
 
   if (login) {
     router.push("/home");

@@ -19,14 +19,7 @@ const CadastroUsuario = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      user_name: "pepita",
-      nome: "pepita",
-      password: "123",
-      email: "p@p.com.br",
-      documento: "123.456.789-88",
-      dt_nascimento: "20025-11-22",
-    },
+    defaultValues: {},
   });
   const [loading, setLoading] = useState(false);
 

@@ -16,7 +16,7 @@ const CadastroProdutoApp = () => {
   const [isPending, startTransition] = useTransition();
   const { getDadosProdutos } = useMercadoContext();
   const searchParams = useSearchParams();
-  const idParams = earchParams.get("id");
+  const idParams = searchParams.get("id");
   const router = useRouter();
 
   const { handleSubmit, register, control, trigger, reset } = useForm();
