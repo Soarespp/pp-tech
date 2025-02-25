@@ -227,10 +227,10 @@ const ShopList = () => {
               <button
                 className="px-6 py-2 bg-green-900 text-white rounded-lg
                          hover:bg-green-800 transition-colors duration-200
-                         flex items-center whitespace-nowrap"
+                         flex items-center whitespace-nowrap sm:px-3"
               >
                 <FiSearch className="w-5 h-5 mr-2" />
-                Buscar
+                {/* Buscar */}
               </button>
 
               {/* Botão de Reload */}
@@ -248,7 +248,7 @@ const ShopList = () => {
         </div>
 
         {/* Navegação de Tipo */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 mb-6">
           <div className="flex justify-center bg-white rounded-lg shadow-sm overflow-hidden">
             <div className="flex flex-1 col-auto items-center justify-center">
               <button
@@ -268,7 +268,7 @@ const ShopList = () => {
               <div className="w-px bg-gray-200" />
 
               <button
-                className={`flex items-center justify-center space-x-2 px-6 py-3 w-40
+                className={`flex items-center justify-center space-x-1 px-6 py-3 w-40
               transition-all duration-200 cursor-pointer
               ${
                 typeList !== "SHOP"

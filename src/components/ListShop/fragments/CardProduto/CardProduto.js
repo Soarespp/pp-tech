@@ -78,8 +78,8 @@ const CardProduto = ({ produto }) => {
                 ${produto.falta ? "border-l-4 border-red-500" : ""}
                 my-8`}
       >
-        <div className="flex items-center p-4">
-          <div className="relative w-50 h-50 flex-shrink-0">
+        <div className="relative flex-wrap items-center p-4">
+          <div className="flex w-full h-50 flex-shrink-0 text-center items-center justify-center">
             <img
               src={produto.img}
               alt={produto.name}
