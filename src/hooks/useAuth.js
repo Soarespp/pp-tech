@@ -22,7 +22,7 @@ export const useAuth = () => {
     const hasPageLogin = pagesNotAuth.includes(pagina);
 
     if (usuarios?.length < 1 && !hasPageLogin) {
-      logout();
+      return;
     }
 
     if (hasPageLogin && !token) {

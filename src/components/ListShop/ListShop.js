@@ -1,6 +1,6 @@
 import CardProduto from "./fragments/CardProduto";
 
-const ListShop = ({ lista, setTypeList, typeList }) => {
+const ListShop = ({ lista, typeOrder, typeList, filter }) => {
   return (
     <div>
       <div className="max-w-7xl mx-auto space-y-4">
@@ -11,7 +11,9 @@ const ListShop = ({ lista, setTypeList, typeList }) => {
                 ? fil.confirmed || fil.falta
                 : !fil.confirmed && !fil.falta
             )
-            .sort((a, b) => a.id - b.id)
+            ?.filter((fil) =>
+              filter.id === 0 ? true : fil.produtos.id_categoria === filter.id
+            )
             .map((itens) => (
               <CardProduto
                 produto={{ ...itens, ...itens.produtos, id: itens.id }}

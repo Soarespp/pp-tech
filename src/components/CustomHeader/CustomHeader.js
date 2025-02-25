@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 
 const CustomHeader = ({ children }) => {
-  const { userDados } = useLoginContext();
+  const { userDados, usuarios } = useLoginContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { hasToken, deslogar } = useLoginContext();
@@ -25,7 +25,7 @@ const CustomHeader = ({ children }) => {
 
   useEffect(() => {
     validation();
-  }, []);
+  }, [usuarios]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -50,7 +50,7 @@ const CustomHeader = ({ children }) => {
                   className="flex items-center space-x-2 focus:outline-none"
                 >
                   <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center">
-                    {userDados?.nome[0] + userDados?.nome[1]}
+                    {userDados?.nome?.[0] + userDados?.nome?.[1]}
                   </div>
                   <FiChevronDown
                     className={`text-gray-600 transition-transform duration-200 ${
@@ -64,9 +64,11 @@ const CustomHeader = ({ children }) => {
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-50 border border-gray-100">
                     <div className="px-4 py-2 border-b border-gray-100">
                       <p className="text-sm font-medium text-gray-900">
-                        {userDados.nome}
+                        {userDados?.nome}
                       </p>
-                      <p className="text-sm text-gray-500">{userDados.email}</p>
+                      <p className="text-sm text-gray-500">
+                        {userDados?.email}
+                      </p>
                     </div>
 
                     <Link

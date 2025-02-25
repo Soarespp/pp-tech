@@ -18,6 +18,7 @@ const CadastroProdutoApp = () => {
   const searchParams = useSearchParams();
   const idParams = searchParams.get("id");
   const router = useRouter();
+  const [produtoDefault, setProtudoDefault] = useState(undefined);
 
   const { handleSubmit, register, control, trigger, reset } = useForm();
 
@@ -26,9 +27,11 @@ const CadastroProdutoApp = () => {
       const defaultProd = await produtoService.getProduto(idParams);
 
       if (!defaultProd) {
+        setProtudoDefault(undefined);
         return;
       }
 
+      setProtudoDefault(defaultProd);
       reset({
         name: defaultProd.name,
         categoria:
@@ -64,10 +67,9 @@ const CadastroProdutoApp = () => {
 
   const clickDelete = () => {
     startTransition(async () => {
-      await produtoService.deleteItem(idParams);
+      await produtoService.deleteProduto(produtoDefault);
 
       getDadosProdutos();
-
       router.push("/shopList");
     });
   };
@@ -185,9 +187,10 @@ const CadastroProdutoApp = () => {
               {idParams && (
                 <div className="flex-1">
                   <button
+                    type="button"
                     className="px-4 py-2 text-red-700 
                        rounded-lg transition-colorstext-red-500 hover:bg-red-300"
-                    onClick={() => clickDelete(2)}
+                    onClick={() => clickDelete()}
                   >
                     Exluir
                   </button>

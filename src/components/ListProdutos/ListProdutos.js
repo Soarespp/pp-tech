@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation";
 import { FiX, FiPlus, FiSearch } from "react-icons/fi";
 import { SlReload } from "react-icons/sl";
 import { BsPencil } from "react-icons/bs";
+import { getDadosCategoria } from "@/utils/formaters/listaCompras";
 
 const ListProdutos = ({ produtos, open, onClose }) => {
   const [search, setSearch] = useState("");
   const router = useRouter();
+  const [sort, setSort] = useState("categoria");
+
   const { getDadosProdutos, controlProdutoLista, getDadosListaMercado } =
     useMercadoContext();
   const [loteProdutos, setLoteProdutos] = useState([]);
@@ -27,7 +30,7 @@ const ListProdutos = ({ produtos, open, onClose }) => {
       await controlProdutoLista(loteProdutos).then(() => getDadosProdutos());
     }
 
-    // getDadosListaMercado();
+    getDadosListaMercado();
     onClose();
   };
 
@@ -37,6 +40,18 @@ const ListProdutos = ({ produtos, open, onClose }) => {
     } else {
       setLoteProdutos((old) => old.filter((p) => p.id !== produto));
     }
+  };
+
+  const getSort = (a, b) => {
+    if (sort === "az") {
+      return a.name - b.name;
+    }
+
+    if (sort === "za") {
+      return b.name - a.name;
+    }
+
+    return a.id_categoria - b.id_categoria;
   };
 
   return (
@@ -85,65 +100,88 @@ const ListProdutos = ({ produtos, open, onClose }) => {
           </div>
         </div>
 
+        <div className="flex justify-end items-center space-x-3 mr-4">
+          <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+            Ordenar por:
+          </label>
+          <select
+            className="w-40 px-3 py-1.5 border border-gray-200 rounded-lg
+             focus:ring-2 focus:ring-green-900 focus:border-green-900
+             transition-all duration-200 outline-none
+             text-sm text-gray-700 bg-white cursor-pointer"
+            defaultValue={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="categoria">Categoria</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+          </select>
+        </div>
         {/* Products List */}
         <div className="overflow-y-auto max-h-[60vh] p-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {filteredProdutos.map((produto) => (
-              <div
-                key={produto.id}
-                className="flex items-center justify-between p-3 bg-gray-50 
-                         rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    onChange={(e) =>
-                      handleCheckProdutoLote(e.target.checked, produto)
-                    }
-                    className="w-5 h-5 text-green-900 border-gray-300 rounded
-                             focus:ring-green-900 transition-colors cursor-pointer"
-                  />
+            {filteredProdutos
+              .sort((a, b) => getSort(a, b))
+              .map((produto) => {
+                const categoria = getDadosCategoria(produto?.id_categoria);
+
+                return (
                   <div
-                    className="w-12 h-12 bg-white rounded-lg flex items-center 
-                              justify-center border"
+                    key={produto.id}
+                    className={`flex items-center justify-between p-3
+                    ${categoria.color} rounded-lg hover:bg-gray-100 transition-colors`}
                   >
-                    {produto.img ? (
-                      <img
-                        src={produto.img}
-                        alt={produto.name}
-                        className="w-8 h-8 object-contain"
+                    <div className="flex items-center space-x-3">
+                      <input
+                        type="checkbox"
+                        onChange={(e) =>
+                          handleCheckProdutoLote(e.target.checked, produto)
+                        }
+                        className="w-5 h-5 text-green-900 border-gray-300 rounded
+                             focus:ring-green-900 transition-colors cursor-pointer"
                       />
-                    ) : (
-                      <div className="w-8 h-8 bg-gray-200 rounded-full" />
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-800">
-                      {produto.name}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {produto.category || "Sem categoria"}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() =>
-                    router.push(`/shopList/cadastro?id=${produto.id}`)
-                  }
-                  className="p-2 hover:bg-green-900 hover:text-white
+                      <div
+                        className="w-12 h-12 bg-white rounded-lg flex items-center 
+                              justify-center border"
+                      >
+                        {produto.img ? (
+                          <img
+                            src={produto.img}
+                            alt={produto.name}
+                            className="w-8 h-8 object-contain"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-800">
+                          {produto.name}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          {categoria.label || "Sem categoria"}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() =>
+                        router.push(`/shopList/cadastro?id=${produto.id}`)
+                      }
+                      className="p-2 hover:bg-green-900 hover:text-white
                          rounded-full transition-all duration-200"
-                >
-                  <BsPencil className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => handleAddProduct(produto)}
-                  className="p-2 hover:bg-green-900 hover:text-white
+                    >
+                      <BsPencil className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={() => handleAddProduct(produto)}
+                      className="p-2 hover:bg-green-900 hover:text-white
                          rounded-full transition-all duration-200"
-                >
-                  <FiPlus className="w-5 h-5" />
-                </button>
-              </div>
-            ))}
+                    >
+                      <FiPlus className="w-5 h-5" />
+                    </button>
+                  </div>
+                );
+              })}
           </div>
 
           {filteredProdutos.length === 0 && (

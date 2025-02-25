@@ -26,6 +26,7 @@ import {
   VinculaUsers,
 } from "@/components";
 import { useMercadoContext } from "@/context/mercado";
+import { categorias } from "@/utils/constantes";
 
 const ShopList = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ const ShopList = () => {
   const [openListaCompartilhada, setOpenListaCompartilhada] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
   const [finalizar, setFinalizar] = useState(false);
+  const [filter, setFilter] = useState({ id: 0, label: "Todos" });
 
   useEffect(() => {
     getDadosListaMercado();
@@ -175,6 +177,31 @@ const ShopList = () => {
           </div>
         </header>
 
+        <div className="flex items-center overflow-x-auto py-4 px-4 gap-3 hide-scrollbar">
+          {[...categorias, { id: 0, label: "Todos" }]
+            .sort((a, b) => a.id - b.id)
+            .map((cat) => (
+              <button
+                key={cat.id}
+                className={`
+                px-4 py-2 rounded-lg font-medium text-sm
+                hover:opacity-80
+                border ${
+                  filter === cat.label
+                    ? "bg-white border-2 border-black"
+                    : "bg-gray-100"
+                }
+                transition-all duration-200
+                whitespace-nowrap
+                min-w-[80px]
+              `}
+                onClick={() => setFilter(cat)}
+              >
+                {cat.label}
+              </button>
+            ))}
+        </div>
+
         {/* Barra de Pesquisa */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="bg-white rounded-lg shadow-sm p-4">
@@ -268,6 +295,7 @@ const ShopList = () => {
             lista={list?.compras_itens}
             typeList={typeList}
             setTypeList={setTypeList}
+            filter={filter}
           />
         </main>
       </div>

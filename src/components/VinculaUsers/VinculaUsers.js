@@ -37,9 +37,9 @@ const VinculaUsers = ({ open, onClose }) => {
           <h2 className="text-xl font-semibold text-gray-800">
             Vincular Usuários
           </h2>
-          <button onClick={() => setUserVinculo(vinculosCompras)}>
+          {/* <button onClick={() => setUserVinculo(vinculosCompras)}>
             reload
-          </button>
+          </button> */}
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"

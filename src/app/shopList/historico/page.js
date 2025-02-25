@@ -69,14 +69,14 @@ const HistoricoCompras = () => {
             <h1 className="text-xl font-semibold text-gray-800">
               Histórico de Compras
             </h1>
-            <button
+            {/* <button
               onClick={() => {
                 getHistorico(userDados.user_name);
               }}
             >
               reload
-            </button>
-            <div className="w-24" /> {/* Espaço para balanceamento */}
+            </button> */}
+            <div className="w-24" />
           </div>
         </div>
       </header>

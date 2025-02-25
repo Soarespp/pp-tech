@@ -25,6 +25,7 @@ export const produtoService = {
       const { data, error } = await supabase
         .from("produtos")
         .select("*")
+        .is("dtInativacao", null)
         .select();
       if (error) throw error;
 
@@ -60,7 +61,20 @@ export const produtoService = {
     }
   },
 
-  async deleteItem(itemId) {
+  async deleteProduto(item) {
+    const prodAlterado = { ...item, dtInativacao: new Date() };
+    try {
+      const { data, error } = await supabase
+        .from("produtos")
+        .update(prodAlterado)
+        .eq("id", item.id);
+      if (error) throw error;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async deleteItem1(itemId) {
     try {
       const { error } = await supabase
         .from("produtos")

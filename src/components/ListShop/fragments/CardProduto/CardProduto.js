@@ -6,8 +6,12 @@ import { useMercadoContext } from "@/context/mercado";
 import { ItensCompra } from "@/services/compras_item";
 import { FiMinus, FiPlus, FiCheck, FiAlertCircle } from "react-icons/fi";
 import { PiTrashThin } from "react-icons/pi";
+import { getDadosCategoria } from "@/utils/formaters/listaCompras";
+import Image from "next/image";
 
 const CardProduto = ({ produto }) => {
+  const categoria = getDadosCategoria(produto?.id_categoria);
+
   const [question, setQuestion] = useState(false);
   const [hasChangeQt, setHasChange] = useState(produto.id);
   const {
@@ -67,7 +71,9 @@ const CardProduto = ({ produto }) => {
         onConfirm={handleRemoveProduto}
       />
       <div
-        className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200
+        className={`${
+          categoria.color
+        } rounded-lg shadow-sm hover:shadow-md transition-all duration-200
                 ${produto.confirmed ? "border-l-4 border-green-900" : ""}
                 ${produto.falta ? "border-l-4 border-red-500" : ""}
                 my-8`}

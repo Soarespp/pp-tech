@@ -1,3 +1,5 @@
+import { categorias } from "@/utils/constantes";
+
 const formatListaProdutos = (produtos) => {
   if (!produtos) {
     return [];
@@ -19,4 +21,8 @@ export const formatListaCompras = (dataLista) => {
     listaComrpas,
     usuarios: [],
   };
+};
+
+export const getDadosCategoria = (id) => {
+  return categorias.find((i) => i.id === id);
 };
