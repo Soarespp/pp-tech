@@ -177,7 +177,7 @@ const ShopList = () => {
           </div>
         </header>
 
-        <div className="flex items-center overflow-x-auto py-4 px-4 gap-3 hide-scrollbar">
+        <div className="flex items-center overflow-x-auto hide-scrollbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4  gap-3">
           {[...categorias, { id: 0, label: "Todos" }]
             .sort((a, b) => a.id - b.id)
             .map((cat) => (
