@@ -73,7 +73,7 @@ const CardProduto = ({ produto }) => {
       <div
         className={`${
           categoria.color
-        } rounded-lg shadow-sm hover:shadow-md transition-all duration-200
+        } rounded-lg shadow-sm hover:shadow-md transition-all duration-200 
                 ${produto.confirmed ? "border-l-4 border-green-900" : ""}
                 ${produto.falta ? "border-l-4 border-red-500" : ""}
                 my-8`}
@@ -125,7 +125,7 @@ const CardProduto = ({ produto }) => {
             </div>
           </div>
           <button onClick={() => deleteProduto(produto.id)}>
-            <PiTrashThin size={20} />
+            <PiTrashThin size={20} className="text-red-800" />
           </button>
         </div>
 
@@ -159,11 +159,11 @@ const CardProduto = ({ produto }) => {
               <button
                 onClick={() => changeValue("falta", true, produto.id)}
                 className={`flex-1 py-3 flex items-center justify-center
-                   transition-colors duration-200 
+                   transition-colors duration-200 text-red-500
                    ${
                      produto.falta
                        ? "bg-red-50 text-red-600"
-                       : "hover:bg-gray-50 text-gray-600"
+                       : "hover:bg-red-50 text-gray-600"
                    }`}
               >
                 <FiAlertCircle className="mr-2" size={18} />
@@ -173,11 +173,11 @@ const CardProduto = ({ produto }) => {
               <button
                 onClick={() => changeValue("confirmed", true, produto.id)}
                 className={`flex-1 py-3 flex items-center justify-center
-                   transition-colors duration-200
+                   transition-colors duration-200 text-green-800
                    ${
                      produto.confirmed
                        ? "bg-green-100 text-green-900"
-                       : "hover:bg-gray-50 text-gray-600"
+                       : "hover:bg-green-50 text-gray-600"
                    }`}
               >
                 <FiCheck className="mr-2" size={18} />

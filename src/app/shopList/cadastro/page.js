@@ -144,8 +144,8 @@ const CadastroProdutoApp = () => {
                     options={categorias}
                     className="w-full"
                     onChange={onChange}
-                    defaultValue={categorias[categorias.length - 1]}
                     placeholder="Selecione uma categoria"
+                    required
                     inputRef={ref}
                     styles={{
                       control: (base) => ({

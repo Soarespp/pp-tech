@@ -53,4 +53,10 @@ export const categorias = [
     color: "bg-slate-200",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvIxy2JWYMpAjqVWA3eoDlGmRm0SRMl0Smw&s",
   },
+  {
+    id: 10,
+    label: "Farmácia",
+    color: "bg-teal-400",
+    img: "https://www.crfmg.org.br/site/uploads/img-principal/20180905[152310]gt.png",
+  },
 ];

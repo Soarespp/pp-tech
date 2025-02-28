@@ -125,11 +125,13 @@ const ListProdutos = ({ produtos, open, onClose }) => {
               .map((produto) => {
                 const categoria = getDadosCategoria(produto?.id_categoria);
 
+
                 return (
                   <div
                     key={produto.id}
-                    className={`flex items-center justify-between p-3
-                    ${categoria.color} rounded-lg hover:bg-gray-100 transition-colors`}
+                    className={`flex items-center justify-between p-3 ${
+                      categoria?.color ?? "bg-white"
+                    } rounded-lg hover:bg-gray-100 transition-colors`}
                   >
                     <div className="flex items-center space-x-3">
                       <input

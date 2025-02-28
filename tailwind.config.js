@@ -15,6 +15,7 @@ const config = {
     "bg-red-200",
     "bg-fuchsia-200",
     "bg-slate-200",
+    "bg-teal-400",
   ],
   theme: {
     extend: {
