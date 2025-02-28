@@ -12,6 +12,7 @@ import {
   FiShoppingCart,
   FiRefreshCw,
 } from "react-icons/fi";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BsCartPlus, BsBagCheck } from "react-icons/bs";
 import { SlOptionsVertical } from "react-icons/sl";
 import { TbBrandShopee } from "react-icons/tb";
@@ -146,7 +147,7 @@ const ShopList = () => {
                                 hover:bg-gray-50 transition-colors duration-200"
                       >
                         <BsCartPlus className="w-5 h-5 text-green-900" />
-                        <span className="text-gray-700">Novo Produto</span>
+                        <span className="text-gray-700">Add Produto</span>
                       </button>
                       <button
                         onClick={() => {
@@ -168,6 +169,17 @@ const ShopList = () => {
                       >
                         <CiBoxList className="w-5 h-5 text-green-900" />
                         <span className="text-gray-700">Compartilhadas</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          router.push("/shopList/cadastro");
+                          setOpenOptions(false);
+                        }}
+                        className="w-full px-4 py-2 flex items-center space-x-3 
+                                hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        <AiOutlineAppstoreAdd className="w-5 h-5 text-green-900" />
+                        <span className="text-gray-700">Cad. Produto</span>
                       </button>
                     </div>
                   </>

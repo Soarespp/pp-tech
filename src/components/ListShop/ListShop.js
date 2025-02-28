@@ -14,6 +14,7 @@ const ListShop = ({ lista, typeOrder, typeList, filter }) => {
             ?.filter((fil) =>
               filter.id === 0 ? true : fil.produtos.id_categoria === filter.id
             )
+            .sort((a, b) => a.id_categoria - b.id_categoria)
             .map((itens) => (
               <CardProduto
                 produto={{ ...itens, ...itens.produtos, id: itens.id }}
