@@ -33,16 +33,20 @@ export const MercadoProvider = ({ children }) => {
 
   const changeValue = (campo, value, id) => {
     let prodChange = undefined;
-    setList((old) => ({
-      ...old,
-      compras_itens: old.compras_itens.map((defaultItem) => {
-        if (defaultItem.id !== id) {
-          return defaultItem;
-        }
-        prodChange = { ...defaultItem, [campo]: value };
-        return prodChange;
-      }),
-    }));
+
+    const compras = list.compras_itens;
+    if (compras < 0) {
+      return;
+    }
+
+    const atualizaLista = compras.map((old) => {
+      if (old.id !== id) return old;
+
+      prodChange = { ...old, [campo]: value };
+      return { ...old, [campo]: value };
+    });
+
+    setList((old) => ({ ...old, compras_itens: atualizaLista }));
 
     updateProduto(prodChange, id);
   };
@@ -69,19 +73,20 @@ export const MercadoProvider = ({ children }) => {
 
   const resetStatosItem = (idItem) => {
     let prodChange = undefined;
-    const { compras_itens } = list;
 
-    setList((old) => ({
-      ...old,
-      compras_itens: old.compras_itens.map((defaultItem) => {
-        if (defaultItem.id !== idItem) {
-          return defaultItem;
-        }
+    const compras = list.compras_itens;
+    if (compras < 0) {
+      return;
+    }
 
-        prodChange = { ...defaultItem, falta: false, confirmed: false };
-        return prodChange;
-      }),
-    }));
+    const atualizaLista = compras.map((old) => {
+      if (old.id !== idItem) return old;
+
+      prodChange = { ...old, falta: false, confirmed: false };
+      return { ...old, falta: false, confirmed: false };
+    });
+
+    setList((old) => ({ ...old, compras_itens: atualizaLista }));
 
     updateProduto(prodChange, idItem);
   };
@@ -242,6 +247,7 @@ export const MercadoProvider = ({ children }) => {
     historico,
     comprasCompartilhadas,
     vinculosCompras,
+    updateProduto,
     setVinculosCompras,
     changeList,
     setSearch,

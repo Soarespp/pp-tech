@@ -171,7 +171,9 @@ const CardProduto = ({ produto }) => {
               </button>
               <div className="w-px bg-gray-200" />
               <button
-                onClick={() => changeValue("confirmed", true, produto.id)}
+                onClick={async () =>
+                  await changeValue("confirmed", true, produto.id)
+                }
                 className={`flex-1 py-3 flex items-center justify-center
                    transition-colors duration-200 text-green-800
                    ${
